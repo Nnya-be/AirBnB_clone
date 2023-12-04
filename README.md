@@ -1,6 +1,6 @@
 # Airbnb Clone Project
 
-![Airbnb Clone Logo](https://www.google.com/search?channel=fs&client=ubuntu-sn&q=airbnb+logo+png#vhid=wfy8LrQ5F6TfTM&vssid=l)
+![Airbnb Clone Logo](https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Fairbnb-2-logo-png-transparent.png&tbnid=wfy8LrQ5F6TfTM&vet=1&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fairbnb-logo-2%2F&docid=KIrtz5c8u8_otM&w=2400&h=2400&source=sh%2Fx%2Fim%2Fm1%2F1)
 
 ## Introduction
 
