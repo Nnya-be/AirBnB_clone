@@ -1,6 +1,6 @@
 # Airbnb Clone Project
 
-![Airbnb Clone Logo](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231204%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231204T181408Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=e4b9cbd71559c4bd46cfadd84a50181cb9033ef3e5c1714a04c214f5fae375e6)
+![Airbnb Clone Logo](https://www.google.com/search?channel=fs&client=ubuntu-sn&q=airbnb+logo+png#vhid=wfy8LrQ5F6TfTM&vssid=l)
 
 ## Introduction
 
