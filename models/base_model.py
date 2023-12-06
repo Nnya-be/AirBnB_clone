@@ -7,11 +7,23 @@ from uuid import uuid4
 class BaseModel():
     """Base model class."""
 
-    def __init__(self):
-        """Initialize the class when an instance is created."""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key in ['created_at', 'updated_at']:
+                       try:
+                            setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                       except:
+                           setattr(self, key, datetime.now())
+                    else:
+                        setattr(self, key, value)
+
+        else:
+             """Initialize the class when an instance is created."""
+             self.id = str(uuid4())
+             self.created_at = datetime.now()
+             self.updated_at = datetime.now()
     
     def __str__(self):
         """Print the string format of the class."""
