@@ -2,7 +2,7 @@
 """Base model implementation that all models would inherit from."""
 from datetime import datetime
 from uuid import uuid4
-
+from models import storage
 
 class BaseModel():
     """Base model class."""
@@ -24,6 +24,7 @@ class BaseModel():
              self.id = str(uuid4())
              self.created_at = datetime.now()
              self.updated_at = datetime.now()
+             storage.new(self)
     
     def __str__(self):
         """Print the string format of the class."""
@@ -33,6 +34,7 @@ class BaseModel():
         """Update the updated_at with the current datetime."""
         if hasattr(self, 'updated_at'):
             self.updated_at = datetime.now()
+            storage.save()
         else:
             raise AttributeError("Object not fully initialized.")
             
