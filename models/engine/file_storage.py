@@ -8,6 +8,16 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    def classes(self):
+        """Returns a dictionary of all classes."""
+        from models.base_model import BaseModel
+        from models.user import User
+
+        return {
+            'BaseModel':BaseModel,
+            'User':User
+        }
+
     def all(self):
         """Return the dictionary __objects."""
         return self.__objects
@@ -27,13 +37,12 @@ class FileStorage:
 
     def reload(self):
         """Read and deserialize the JSON file to __objects."""
-        from models.base_model import BaseModel
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 load_file = json.load(file)
                 for key, obj_dict in load_file.items():
                     class_name, _ = key.split('.')
-                    cls = BaseModel
+                    cls = self.classes()[class_name]
                     obj = cls(**obj_dict)
                     self.__objects[key] = obj
         except FileNotFoundError:
