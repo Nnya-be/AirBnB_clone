@@ -2,7 +2,6 @@
 """Base model implementation that all models would inherit from."""
 from datetime import datetime
 from uuid import uuid4
-from models import storage
 
 
 class BaseModel():
@@ -25,6 +24,7 @@ class BaseModel():
                     setattr(self, k, v)
         else:
             """Initialize the class when an instance is created."""
+            from models import storage
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
