@@ -4,10 +4,10 @@ import unittest
 from datetime import datetime, timedelta
 import time
 
+
 class TestBaseModel(unittest.TestCase):
     """TestBaseModel for the edge cases for the BaseModel."""
 
-    
     def test_unique_id_generation(self):
         """Test for uniqueness of 2 generated instance id's."""
         instance_1 = BaseModel()
@@ -21,7 +21,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(instance.updated_at, datetime)
 
     def test_update_time_on_save(self):
-        """Test for the difference between the updated times when we call save."""
+        """Test difference between the time on call to save."""
         instance = BaseModel()
         initial_update_time = instance.updated_at
         time.sleep(1)
@@ -64,7 +64,8 @@ class TestBaseModel(unittest.TestCase):
     def test_large_number_of_instances(self):
         instances = [BaseModel() for _ in range(1000)]
         unique_ids = set(instance.id for instance in instances)
-        self.assertEqual(len(unique_ids) , len(instances))
+        self.assertEqual(len(unique_ids), len(instances))
+
 
 if __name__ == '__main__':
     unittest.main()
