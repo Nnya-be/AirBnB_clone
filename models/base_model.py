@@ -16,7 +16,7 @@ class BaseModel():
                         try:
                             a = '%Y-%m-%dT%H:%M:%S.%f'
                             setattr(self, k, datetime.strptime(v, a))
-                        except:
+                        finally:
                             setattr(self, k, datetime.now())
                     else:
                         setattr(self, k, v)
