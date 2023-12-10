@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Check edge cases for the __init__ method on the dict."""
-
-
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+
 
 class TestBaseModelInit(unittest.TestCase):
     def test_empty_kwargs(self):
@@ -19,12 +18,12 @@ class TestBaseModelInit(unittest.TestCase):
         instance = BaseModel(**{'__class__ ': 'TestClass'})
         self.assertTrue(hasattr(instance, '__class__'))
         self.assertNotEqual(getattr(instance, '__class__'), 'TestClass')
-        
+
     def test_additional_att_in_kwargs(self):
         """Test for addding  another attribute."""
         instance = BaseModel(extra_attribute='Value')
         self.assertTrue(hasattr(instance, 'extra_attribute'))
-        self.assertEqual(getattr(instance, 'extra_attribute'),'Value')
+        self.assertEqual(getattr(instance, 'extra_attribute'), 'Value')
 
     def test_string_format_dates(self):
         """Test for the string format of the dates."""
@@ -35,8 +34,8 @@ class TestBaseModelInit(unittest.TestCase):
 
     def test_invalid_datetime_string(self):
         """Test for invalid input for time."""
-        invalid_time_str = 'invalid_datetime_string'
-        instance = BaseModel(created_at=invalid_time_str, updated_at=invalid_time_str)
+        i_time_str = 'invalid_datetime_string'
+        instance = BaseModel(created_at=i_time_str, updated_at=i_time_str)
         self.assertIsInstance(instance.created_at, datetime)
         self.assertIsInstance(instance.updated_at, datetime)
 

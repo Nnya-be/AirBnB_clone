@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Place Module."""
-
 from models.base_model import BaseModel
+
 
 class Place(BaseModel):
     def __init__(self, *args, **kwargs):

@@ -19,8 +19,13 @@ class BaseModel():
                             setattr(self, k, datetime.strptime(v, a))
                         except:
                             setattr(self, k, datetime.now())
+<<<<<<< HEAD
                     else:
                         setattr(self, k, v)
+=======
+                else:
+                    setattr(self, k, v)
+>>>>>>> 9ed3aa9ddab8f419d3417dc287c39d1e0657756e
 
         else:
             """Initialize the class when an instance is created."""
