@@ -1,8 +1,14 @@
+#!/usr/bin/python3
 from datetime import datetime
 import uuid
+"""Base Model."""
+
 
 class BaseModel:
+    """Base Class and its attributes and methods."""
+
     def __init__(self, *args, **kwargs):
+        """Initialize the class."""
         if kwargs:
             for k, v in kwargs.items():
                 if k != '__class__':
@@ -20,12 +26,15 @@ class BaseModel:
             self.updated_at = datetime.now()
 
     def __str__(self):
+        """Return the string form of the class."""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """Save a new instance."""
         self.updated_at = datetime.now()
 
     def to_dict(self):
+        """Return a dict to the instance."""
         class_dict = dict(self.__dict__)
         class_dict['__class__'] = self.__class__.__name__
         class_dict['created_at'] = self.created_at.isoformat()
