@@ -32,6 +32,7 @@ class BaseModel:
         from models import storage
         if hasattr(self, 'updated_at'):
             self.updated_at = datetime.now()
+            storage.save()
         else:
             raise AttributeError("Object not fully initialized.")
             

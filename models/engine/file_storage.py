@@ -36,9 +36,6 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
                 serialized_objects = json.load(file)
                 for key, obj_dict in serialized_objects.items():
-                    cls_name = obj_dict['__class__']
-                    cls = classes[cls_name]
-                    obj = cls(**obj_dict)
-                    self.all()[key] = obj
+                    self.all()[key] = classes[obj_dict['__class__']](**obj_dict)
         except FileNotFoundError:
             pass
