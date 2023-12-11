@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+"""File Storage Module."""
 import json
-from os.path import isfile
 
 
 class FileStorage:
-    __file_path = "file.json"
+    """Class Implementations for the file storage."""
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
@@ -13,14 +14,16 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id."""
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj
+        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
 
     def save(self):
         """Serializes __objects to the JSON file (path: __file_path)."""
-        se_objs = {k: ob.to_dict() for k, ob in FileStorage.__objects.items()}
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(se_objs, file)
+            serialized_obj = {}
+            serialized_obj.update(FileStorage.__objects)
+            for key, value in serialized_obj.items():
+                serialized_obj[key] = value.to_dict()
+            json.dump(serialized_obj, file)
 
     def reload(self):
         """Deserializes the JSON file to __objects."""
