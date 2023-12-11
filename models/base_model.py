@@ -37,8 +37,9 @@ class BaseModel:
             
     def to_dict(self):
         """Return a dict to the instance."""
-        class_dict = dict(self.__dict__)
-        class_dict['__class__'] = self.__class__.__name__
+        class_dict = {}
+        class_dict.update(self.__dict__)
+        class_dict.update({'__class__': self.__class__.__name__})
         class_dict['created_at'] = self.created_at.isoformat()
         class_dict['updated_at'] = self.updated_at.isoformat()
         return class_dict
