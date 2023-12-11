@@ -11,11 +11,11 @@ class BaseModel:
         """Initialize the class."""
         if kwargs:
             d_f = '%Y-%m-%dT%H:%M:%S.%f'
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],d_f)
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],d_f)
+            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'], d_f)
+            kwargs['created_at'] = datetime.strptime(kwargs['created_at'], d_f)
             del kwargs['__class__']
             self.__dict__.update(kwargs)
-            
+
         else:
             from models import storage
             self.id = str(uuid.uuid4())
@@ -35,7 +35,7 @@ class BaseModel:
             storage.save()
         else:
             raise AttributeError("Object not fully initialized.")
-            
+
     def to_dict(self):
         """Return a dict to the instance."""
         class_dict = {}
