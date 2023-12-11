@@ -29,7 +29,7 @@ class FileStorage:
         classes = {
             'BaseModel': BaseModel,
         }
-        if isfile(FileStorage.__file_path):
+        try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
                 serialized_objects = json.load(file)
                 for key, obj_dict in serialized_objects.items():
@@ -37,4 +37,5 @@ class FileStorage:
                     cls = classes[cls_name]
                     obj = cls(**obj_dict)
                     self.all()[key] = obj
-                    print(obj)
+        except FileNotFoundError:
+            pass
