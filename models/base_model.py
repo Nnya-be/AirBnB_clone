@@ -21,9 +21,11 @@ class BaseModel:
                     else:
                         setattr(self, k, v)
         else:
+            from models import storage
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Return the string form of the class."""
@@ -31,8 +33,12 @@ class BaseModel:
 
     def save(self):
         """Save a new instance."""
-        self.updated_at = datetime.now()
-
+        from models import storage
+        if hasattr(self, 'updated_at'):
+            self.updated_at = datetime.now()
+        else:
+            raise AttributeError("Object not fully initialized.")
+            
     def to_dict(self):
         """Return a dict to the instance."""
         class_dict = dict(self.__dict__)
