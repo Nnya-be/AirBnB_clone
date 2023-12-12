@@ -122,11 +122,26 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """Called on an input line when the command prefix is not recognized."""
-        class_name = line.split('.')[0]
-        if class_name in self.classes and line.endswith('.all()'):
-            self.do_all(class_name)
+        parts = line.split('.')
+        if len(parts) == 2:
+            class_name, method = parts
+            if method == 'all()':
+                if class_name in self.classes:
+                    class_instances = storage.all().values()
+                    filtered_instances = [str(obj) for obj in class_instances if isinstance(obj, self.classes[class_name])]
+                    print(filtered_instances)
+                else:
+                    print("** class doesn't exist **")
+            elif method == 'count()':
+                if class_name in self.classes:
+                    class_instances = storage.all().values()
+                    count = sum(1 for obj in class_instances if isinstance(obj, self.classes[class_name]))
+                    print(count)
+                else:
+                    print("** class doesn't exist **")
+            else:
+                print("*** Unknown syntax:", line)
         else:
             print("*** Unknown syntax:", line)
-
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
