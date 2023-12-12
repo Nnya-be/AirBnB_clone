@@ -4,34 +4,18 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-<<<<<<< HEAD
 from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
-=======
-from models.review import Review
-from models.place import Place
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
->>>>>>> 438c6b2 (MOdified)
-
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class."""
 
     classes = {
-<<<<<<< HEAD
             'BaseModel': BaseModel, 'User': User, 'Place': Place,
             'State': State, 'City': City, 'Amenity': Amenity,
             'Review': Review
-=======
-        'BaseModel': BaseModel, 'User': User, 'Review': Review,
-        'Place': Place, 'State': State, 'Amenity': Amenity,
-        'City': City
->>>>>>> 438c6b2 (MOdified)
     }
     prompt = "(hbnb) "
 
