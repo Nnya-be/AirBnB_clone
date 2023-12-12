@@ -59,6 +59,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.model.created_at, new_model.created_at)
         self.assertEqual(self.model.updated_at, new_model.updated_at)
 
+    def test_save(self):
+        """Test the save method of BaseModel"""
+        original_updated_at = self.model.updated_at
+        self.model.save()
+        new_updated_at = self.model.updated_at
+        self.assertNotEqual(original_updated_at, new_updated_at)
+        self.assertGreater(new_updated_at, original_updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()

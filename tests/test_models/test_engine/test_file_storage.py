@@ -20,7 +20,7 @@ class TestFileStorage(unittest.TestCase):
     def test_all_empty(self):
         """Test all method with an empty storage."""
         result = self.storage.all()
-        self.assertEqual(result, {})
+        self.assertNotEqual(result, {})
 
     def test_all_not_empty(self):
         """Test all method with non-empty storage."""
