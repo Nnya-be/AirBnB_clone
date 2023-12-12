@@ -5,19 +5,20 @@ import json
 
 class FileStorage:
     """Class Implementations for the file storage."""
+
     __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-        """Returns the dictionary __objects."""
+        """Return the dictionary __objects."""
         return FileStorage.__objects
 
     def new(self, obj):
-        """Sets in __objects the obj with key <obj class name>.id."""
+        """Set in __objects the obj with key <obj class name>.id."""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
 
     def save(self):
-        """Serializes __objects to the JSON file (path: __file_path)."""
+        """Serialize __objects to the JSON file (path: __file_path)."""
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
             serialized_obj = {}
             serialized_obj.update(FileStorage.__objects)
@@ -31,7 +32,7 @@ class FileStorage:
         from models.user import User
 
         cls = {
-            'BaseModel': BaseModel, 'User' : User,
+            'BaseModel': BaseModel, 'User': User,
         }
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
