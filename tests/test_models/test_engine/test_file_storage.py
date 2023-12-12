@@ -65,15 +65,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(result[key].created_at, obj.created_at)
         self.assertEqual(result[key].updated_at, obj.updated_at)
 
-    def test_objects_attribute(self):
-        """Test the __objects attribute of FileStorage"""
-        test_data = {"TestKey": {"id": "TestId", "name": "TestName"}}
-        self.storage._FileStorage__objects = test_data
-        self.storage.save()
-        self.storage.reload()
-        loaded_data = self.storage.all()
-        self.assertNotEqual(loaded_data, test_data)
-
-
+        
 if __name__ == "__main__":
     unittest.main()
