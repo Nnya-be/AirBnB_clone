@@ -43,7 +43,6 @@ class HBNBCommand(cmd.Cmd):
                 return f"{method} {cls} {args}"
             else:
                 split = args.split(',')
-                print(split[0], split[1], split[2])
                 return f'{method} {cls} {split[0]} {split[1]} {split[2]}'
         return line
 
