@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Command interpreter for HBNB project."""
 import cmd
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -31,6 +32,20 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty line."""
         pass
+    
+    def precmd(self, line):
+        """Called before a command line is interpreted."""
+        match = re.match(r'^(\w+)\.(\w+)\((.*)\)$', line)
+        if match:
+            cls, method, args = match.groups()
+            args = args.replace('"', '')
+            if method != 'update':
+                return f"{method} {cls} {args}"
+            else:
+                split = args.split(',')
+                print(split[0], split[1], split[2])
+                return f'{method} {cls} {split[0]} {split[1]} {split[2]}'
+        return line
 
     def do_create(self, arg):
         """Create an instance."""
@@ -117,31 +132,21 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             instance = storage.all()[key]
-            setattr(instance, args[2], eval(args[3]))
+            val = args[3].replace('"','')
+            setattr(instance, args[2], val)
             instance.save()
 
+    def do_count(self, args):
+        """Count current number of class instances"""
+        count = 0
+        for k, v in storage._FileStorage__objects.items():
+            if args == k.split('.')[0]:
+                count += 1
+        print(count)
+
     def default(self, line):
-        """Called on an input line when the command prefix is not recognized."""
-        parts = line.split('.')
-        if len(parts) == 2:
-            class_name, method = parts
-            if method == 'all()':
-                if class_name in self.classes:
-                    class_instances = storage.all().values()
-                    filtered_instances = [str(obj) for obj in class_instances if isinstance(obj, self.classes[class_name])]
-                    print(filtered_instances)
-                else:
-                    print("** class doesn't exist **")
-            elif method == 'count()':
-                if class_name in self.classes:
-                    class_instances = storage.all().values()
-                    count = sum(1 for obj in class_instances if isinstance(obj, self.classes[class_name]))
-                    print(count)
-                else:
-                    print("** class doesn't exist **")
-            else:
-                print("*** Unknown syntax:", line)
-        else:
-            print("*** Unknown syntax:", line)
+        """Handle all the other .methods."""
+        print("*** Unknown syntax:", line)
+        
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
